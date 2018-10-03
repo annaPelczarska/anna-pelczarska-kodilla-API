@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
