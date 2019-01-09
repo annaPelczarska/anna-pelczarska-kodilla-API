@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -23,26 +24,24 @@ public class TrelloController {
     @RequestMapping(method = RequestMethod.GET, value = "getTrelloBoards")
     public List<TrelloBoardDto> getTrelloBoards() {
 
-        List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
-
-        List<TrelloBoardDto> searchTrelloBoards =trelloBoards.stream()
+        List<TrelloBoardDto>filteredTrelloBoards = trelloClient.getTrelloBoards().stream()
                 .filter(trelloBoardDto -> (!trelloBoardDto.getName().isEmpty() && !trelloBoardDto.getId().isEmpty()))
                 .filter(trelloBoardDto -> trelloBoardDto.getName().contains("Kodilla"))
                 .collect(Collectors.toList());
 
-        searchTrelloBoards.forEach(trelloBoardDto -> System.out.println(trelloBoardDto.getId() + " " + trelloBoardDto.getName()));
+        filteredTrelloBoards.forEach(trelloBoardDto -> System.out.println(trelloBoardDto.getId() + " " + trelloBoardDto.getName()));
 
-        if(searchTrelloBoards.isEmpty()){
+        if(filteredTrelloBoards.isEmpty()){
             System.out.println("There are no boards matching search criteria. Full list of the user's boards can be found below");
-        trelloBoards.forEach(trelloBoardDto ->
+        trelloClient.getTrelloBoards().forEach(trelloBoardDto ->
                     System.out.println(trelloBoardDto.getId() + " - " + trelloBoardDto.getName()));
                 }
 
-       return trelloBoards;
+        return filteredTrelloBoards;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createTrelloCard")
-    public CreatedTrelloCard createTrelloCard(@RequestBody TrelloCardDto trelloCardDto){
+    public CreatedTrelloCard createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
         return trelloClient.createNewCard(trelloCardDto);
     }
 }
