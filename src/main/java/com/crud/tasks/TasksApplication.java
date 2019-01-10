@@ -10,14 +10,14 @@ import java.sql.SQLOutput;
 
 @SpringBootApplication
 public class TasksApplication
-       // extends SpringBootServletInitializer
+        //extends SpringBootServletInitializer
 {
     public static void main(String[] args) {
         SpringApplication.run(TasksApplication.class, args);
     }
 
 
- /*   @Override
+  /*  @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(TasksApplication.class);
     }*/
