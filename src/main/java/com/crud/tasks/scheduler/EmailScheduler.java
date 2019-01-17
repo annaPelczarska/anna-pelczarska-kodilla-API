@@ -23,20 +23,15 @@ public class EmailScheduler {
     @Autowired
     private AdminConfig adminConfig;
 
-    public String displayMessageOnTasksSize() {
-        long size = taskRepository.count();
-        if (size == 1) {
-            return MAIL_CONTENT + size + "task";
-        }
-        return MAIL_CONTENT + size + "tasks.";
-    }
+    long size = taskRepository.count();
+
+    public String messageOnTasksSize = (size == 1) ? MAIL_CONTENT + size + "task" : MAIL_CONTENT + size + "tasks";
 
     @Scheduled(cron = "0 0 10 * * *")
     public void sendInformationEmail() {
-        long size = taskRepository.count();
+        //long size = taskRepository.count();
         simpleEmailService.send(new Mail(
                 adminConfig.getAdminMail(),
-                SUBJECT, displayMessageOnTasksSize())
-        );
+                SUBJECT, messageOnTasksSize));
     }
 }
