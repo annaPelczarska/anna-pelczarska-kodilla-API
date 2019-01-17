@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class EmailScheduler {
 
@@ -23,15 +25,21 @@ public class EmailScheduler {
     @Autowired
     private AdminConfig adminConfig;
 
-    long size = taskRepository.count();
+   //long size = taskRepository.count();
+    //public String messageOnTasksSize = (size == 1) ? MAIL_CONTENT + size + "task" : MAIL_CONTENT + size + "tasks";
 
-    public String messageOnTasksSize = (size == 1) ? MAIL_CONTENT + size + "task" : MAIL_CONTENT + size + "tasks";
+    public String displayMessageOnTasksSize() {
+        long size = taskRepository.count();
+        if (size == 1) {
+            return MAIL_CONTENT + size + "task";
+        }
+        return MAIL_CONTENT + size + "tasks.";
+    }
 
     @Scheduled(cron = "0 0 10 * * *")
     public void sendInformationEmail() {
-        //long size = taskRepository.count();
         simpleEmailService.send(new Mail(
                 adminConfig.getAdminMail(),
-                SUBJECT, messageOnTasksSize));
+                SUBJECT, displayMessageOnTasksSize(), adminConfig.getAdminMail()));
     }
 }

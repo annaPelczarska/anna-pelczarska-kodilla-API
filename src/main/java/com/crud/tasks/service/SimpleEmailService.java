@@ -8,6 +8,7 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.apache.commons.validator.routines.EmailValidator;
 
 @Service
 public class SimpleEmailService {
@@ -33,10 +34,11 @@ public class SimpleEmailService {
         mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
-   /*     if(mail.getToCc() != null) {
+        
+        if(EmailValidator.getInstance().isValid(mail.getToCc())) {
             mailMessage.setCc(mail.getToCc());
             mailMessage.setTo(mail.getMailTo());
-        }*/
+        }
         return mailMessage;
     }
 }
