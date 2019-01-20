@@ -42,19 +42,19 @@ public class TrelloClientTest {
     @Test
     public void shouldFetchTrelloBoards() throws URISyntaxException {
         //Given
-        TrelloBoardDto[] trelloBoards = new TrelloBoardDto[1];
-        trelloBoards[0] = new TrelloBoardDto("test_id", "test_board", new ArrayList<>());
+        TrelloBoardDto[] trelloBoardDtos = new TrelloBoardDto[1];
+        trelloBoardDtos[0] = new TrelloBoardDto("test_id", "test_board", new ArrayList<>());
 
         URI uri = new URI("http://test.com/members/ankapelczarska/boards?key=test&token=test&fields=name,id&lists=all");
 
-        when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(trelloBoards);
+        when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(trelloBoardDtos);
         //When
-        List<TrelloBoardDto> fetchedTrelloBoards = trelloClient.getTrelloBoards();
+        List<TrelloBoardDto> fetchedTrelloBoardDtos = trelloClient.getTrelloBoards();
         //Then
-        assertEquals(1, fetchedTrelloBoards.size());
-        assertEquals("test_id", fetchedTrelloBoards.get(0).getId());
-        assertEquals("test_board", fetchedTrelloBoards.get(0).getName());
-        assertEquals(new ArrayList<>(), fetchedTrelloBoards.get(0).getLists());
+        assertEquals(1, fetchedTrelloBoardDtos.size());
+        assertEquals("test_id", fetchedTrelloBoardDtos.get(0).getId());
+        assertEquals("test_board", fetchedTrelloBoardDtos.get(0).getName());
+        assertEquals(new ArrayList<>(), fetchedTrelloBoardDtos.get(0).getLists());
     }
 
     @Test
