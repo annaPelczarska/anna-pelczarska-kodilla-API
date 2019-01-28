@@ -27,6 +27,9 @@ public class TrelloMapperTestSuite {
         List<TrelloBoard> trelloBoards = trelloMapper.mapToBoards(boardDtos);
         //Then
         assertEquals(1, trelloBoards.size());
+        assertEquals("new board id", trelloBoards.get(0).getId());
+        assertEquals("new board name", trelloBoards.get(0).getName());
+        assertEquals(1, trelloBoards.get(0).getLists().size());
     }
 
     @Test
@@ -40,6 +43,9 @@ public class TrelloMapperTestSuite {
         List<TrelloBoardDto> trelloBoardDtos = trelloMapper.mapToBoardsDto(boards);
         //Then
         assertEquals(1, trelloBoardDtos.size());
+        assertEquals("new board id", trelloBoardDtos.get(0).getId());
+        assertEquals("new board name", trelloBoardDtos.get(0).getName());
+        assertEquals(1, trelloBoardDtos.get(0).getLists().size());
     }
 
     @Test
@@ -51,6 +57,9 @@ public class TrelloMapperTestSuite {
         List<TrelloList> trelloLists =trelloMapper.mapToList(listDtos);
         //Then
         assertEquals(1,trelloLists.size());
+        assertEquals("new list id",trelloLists.get(0).getId());
+        assertEquals("new list name",trelloLists.get(0).getName());
+        assertEquals(false,trelloLists.get(0).isClosed());
     }
 
     @Test
@@ -62,6 +71,9 @@ public class TrelloMapperTestSuite {
         List<TrelloListDto> listDtos =trelloMapper.mapToListDto(lists);
         //Then
         assertEquals(1,listDtos.size());
+        assertEquals("new list id",listDtos.get(0).getId());
+        assertEquals("new list name",listDtos.get(0).getName());
+        assertEquals(false,listDtos.get(0).isClosed());
     }
 
     @Test
@@ -72,6 +84,9 @@ public class TrelloMapperTestSuite {
         TrelloCardDto cardDto = trelloMapper.mapToCardDto(trelloCard);
         //Then
         assertEquals("card name",cardDto.getName());
+        assertEquals("card description",cardDto.getDescription());
+        assertEquals("card position",cardDto.getPos());
+        assertEquals("list id",cardDto.getListId());
     }
 
     @Test
@@ -82,5 +97,9 @@ public class TrelloMapperTestSuite {
         TrelloCard trelloCard = trelloMapper.mapToCard(cardDto);
         //Then
         assertEquals("card position",trelloCard.getPos());
+        assertEquals("card name", trelloCard.getName());
+        assertEquals("card description", trelloCard.getDescription());
+        assertEquals("list id", trelloCard.getListId());
+
     }
 }
