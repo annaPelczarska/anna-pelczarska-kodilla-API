@@ -26,11 +26,14 @@ public class EmailScheduler {
     private AdminConfig adminConfig;
 
 
-
-
     public String displayMessageOnTasksSize() {
-        long size = taskRepository.count();
-        String messageOnTasksSize = (size == 1) ? MAIL_CONTENT + size + "task" : MAIL_CONTENT + size + "tasks";
+        long size = 0L;
+        if(taskRepository==null) {
+        }
+            else {
+            size=taskRepository.count();
+        }
+        String messageOnTasksSize = (size == 1) ? MAIL_CONTENT + size + " task" : MAIL_CONTENT + size + " tasks";
         return messageOnTasksSize;
     }
 
