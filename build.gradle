@@ -30,8 +30,8 @@ dependencies {
     compile('org.projectlombok:lombok')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     
-    compile('mysql:mysql-connector-java')
-    //compile('org.postgresql:postgresql')
+    //compile('mysql:mysql-connector-java')
+    compile('org.postgresql:postgresql')
 
     //front adjustment
     compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.22'
