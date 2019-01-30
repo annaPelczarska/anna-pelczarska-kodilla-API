@@ -26,7 +26,7 @@ public class EmailSchedulerTestSuite {
     public void displayMessageOnTasksSizeTest() {
         //Given
         long size = 0L;
-        final String MAIL_CONTENT = "Currently in database you got: ";
+        final String MAIL_CONTENT = "Currently you have: ";
         String messageOnTasksSize = (size == 1) ? MAIL_CONTENT + size + " task" : MAIL_CONTENT + size + " tasks";
         //When
        String theMessage = emailScheduler.displayMessageOnTasksSize();
