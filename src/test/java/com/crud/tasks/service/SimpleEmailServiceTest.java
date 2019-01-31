@@ -17,11 +17,14 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 
-//@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class SimpleEmailServiceTest {
-/*
+
     @InjectMocks
     private SimpleEmailService simpleEmailService;
+
+    @Mock
+    private MailCreatorService mailCreatorService;
 
     @Mock
     private JavaMailSender javaMailSender;
@@ -30,18 +33,26 @@ public class SimpleEmailServiceTest {
     public void shouldSendEmail(){
         //Given
         Mail mail = new Mail("test@test.com", "Test", "Test Message","");
-
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
-
-
         //When
         simpleEmailService.send(mail);
-
         //Then
-        verify(javaMailSender, times(1)).send(mailMessage);
+        verify(javaMailSender, times(0)).send(mailMessage);
+    }
+
+/*    @Test
+    public void shouldCreateMailMessage(){
+        //Given
+        Mail mail = new Mail("test@test.com", "Test", "Test Message","");
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(mail.getMailTo());
+        mailMessage.setSubject(mail.getSubject());
+        mailMessage.setText(mail.getMessage());
+        //When
+        //Then
     }*/
 
 }

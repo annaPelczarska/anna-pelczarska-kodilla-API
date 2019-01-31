@@ -97,6 +97,20 @@ public class TrelloFacadeTest {
     }
 
     @Test
-    public void createCard() {
+    public void shouldCreateCard() {
+        TrelloCardDto trelloCardDto = new TrelloCardDto("task1", "description1", "pos", "listId");
+        TrelloCard trelloCard = new TrelloCard("task1", "description1", "pos", "listId");
+        CreatedTrelloCardDto createdTrelloCardDto = new CreatedTrelloCardDto("id", "task1", "http://");
+
+        when(trelloMapper.mapToCard(trelloCardDto)).thenReturn(trelloCard);
+        when(trelloMapper.mapToCardDto(trelloCard)).thenReturn(trelloCardDto);
+        when(trelloService.createTrelloCard(trelloCardDto)).thenReturn(createdTrelloCardDto);
+        //When
+        CreatedTrelloCardDto newCard = trelloFacade.createCard(trelloCardDto);
+        //Then
+        assertEquals("id",newCard.getId());
+        assertEquals("task1", newCard.getName());
+        assertEquals("http://",newCard.getShortUrl());
+
     }
 }
