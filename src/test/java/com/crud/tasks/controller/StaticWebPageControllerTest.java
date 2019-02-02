@@ -15,32 +15,28 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(TaskController.class)
+@WebMvcTest(StaticWebPageController.class)
 public class StaticWebPageControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-    @MockBean
-    private StaticWebPageController webPageController;
-    @MockBean
-    private DbService dbService;
-    @MockBean
-    private TaskMapper taskMapper;
 
     @Test
-    public void indexTest(){
+    public void indexTest() throws Exception{
 
         //Given
         Map<String,Object> theMap = new HashMap<>();
         theMap.put("plus","+");
-        theMap.put("minus","-");
-       /* //When
-        String theIndex = webPageController.index(theMap);
-        //Then
-        assertEquals("?", theIndex);*/
+        //When & Then
+        mockMvc.perform(get("http://localhost:8080/")).andExpect(status().isOk());
+
+
+        //String theIndex = webPageController.index(theMap);
+        //assertEquals("+", theIndex);
 
        //mockMvc.perform((webPageController.index(theMap)).contentEquals("plus")).andExpect(status().isOk());
 
